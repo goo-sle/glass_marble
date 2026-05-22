@@ -441,30 +441,34 @@
   .expense-add-row {
     padding: 8px 18px;
     display: flex;
-    gap: 6px;
+    align-items: center;
+    gap: 8px;
   }
   .expense-add-input {
     flex: 1;
+    min-width: 0;
     background: #f8f9fa;
     border: 1px dashed #dee2e6;
     border-radius: 8px;
     color: var(--text);
     font-size: 16px;
     font-family: 'Noto Sans KR', sans-serif;
-    padding: 5px 10px;
+    padding: 8px 10px;
     outline: none;
   }
   .expense-add-input:focus { border-color: var(--mint); }
   .expense-add-btn {
+    flex-shrink: 0;
     background: rgba(78,205,196,0.1);
     border: 1px solid rgba(78,205,196,0.3);
     border-radius: 8px;
     color: var(--mint);
-    font-size: 0.75rem;
-    padding: 5px 12px;
+    font-size: 0.82rem;
+    padding: 8px 14px;
     cursor: pointer;
     white-space: nowrap;
     transition: background 0.2s;
+    -webkit-tap-highlight-color: transparent;
   }
   .expense-add-btn:hover { background: rgba(78,205,196,0.2); }
   .expense-grand-row {
