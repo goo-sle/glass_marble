@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오사카 뿌시기 프로젝트</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+  :root {
+    --primary: #FF6B6B;
+    --primary-dark: #E85555;
+    --peach: #FFB347;
+    --mint: #4ECDC4;
+    --bg: #f8f9fa;
+    --white: #ffffff;
+    --text: #2d3436;
+    --text-light: #636e72;
+    --text-muted: #b2bec3;
+    --card-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --day1: #FF6B6B;
+    --day2: #FFA07A;
+    --day3: #4ECDC4;
+    --day4: #9B59B6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-bottom: 70px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 60px 20px 50px;
+    text-align: center;
+    background: #ffffff;
+  }
+
+  .hero-title {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 10vw, 4.5rem);
+    line-height: 1.15;
+    margin-bottom: 18px;
+    letter-spacing: -1px;
+  }
+  .hero-title .t1 { color: var(--primary); display: block; }
+  .hero-title .t2 { color: var(--mint); display: block; }
+
+  .hero-sub {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.82rem;
+    color: var(--mint);
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-date {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 400;
+  }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-section {
+    padding: 28px 16px 10px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .sum-card {
+    background: var(--white);
+    border: none;
+    border-radius: 16px;
+    padding: 14px 6px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+  }
+  .sum-card .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.7rem;
+    line-height: 1;
+    color: var(--primary);
+  }
+  .sum-card .label {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+    font-weight: 300;
+  }
+
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 28px 16px 12px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── DAY CARDS ── */
+  .days-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .day-card {
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--white);
+    border: none;
+    box-shadow: var(--card-shadow);
+  }
+
+  .day-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .day-badge {
+    width: 46px; height: 46px;
+    border-radius: 14px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Bebas Neue', sans-serif;
+  }
+  .day-badge .d { font-size: 0.6rem; letter-spacing: 1px; opacity: 0.8; }
+  .day-badge .n { font-size: 1.4rem; line-height: 1; }
+  .day-info {}
+  .day-date { font-size: 0.95rem; font-weight: 700; }
+  .day-theme { font-size: 0.72rem; color: var(--text-light); margin-top: 2px; }
+
+  /* color per day */
+  .d1 .day-header { background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,107,107,0.03)); }
+  .d1 .day-badge { background: rgba(255,107,107,0.15); color: #FF6B6B; }
+  .d1 .day-date { color: #FF6B6B; }
+
+  .d2 .day-header { background: linear-gradient(135deg, rgba(255,160,122,0.1), rgba(255,160,122,0.03)); }
+  .d2 .day-badge { background: rgba(255,160,122,0.15); color: #FFA07A; }
+  .d2 .day-date { color: #FFA07A; }
+
+  .d3 .day-header { background: linear-gradient(135deg, rgba(78,205,196,0.1), rgba(78,205,196,0.03)); }
+  .d3 .day-badge { background: rgba(78,205,196,0.15); color: #4ECDC4; }
+  .d3 .day-date { color: #4ECDC4; }
+
+  .d4 .day-header { background: linear-gradient(135deg, rgba(155,89,182,0.1), rgba(155,89,182,0.03)); }
+  .d4 .day-badge { background: rgba(155,89,182,0.15); color: #B07FD4; }
+  .d4 .day-date { color: #B07FD4; }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    padding: 4px 0 16px 20px;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 34px; top: 0; bottom: 0;
+    width: 1px;
+    background: #eeeeee;
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 14px;
+    padding: 10px 16px 10px 0;
+    position: relative;
+  }
+  .tl-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+    position: relative;
+    z-index: 1;
+  }
+  .d1 .tl-dot { background: rgba(255,107,107,0.8); box-shadow: 0 0 6px rgba(255,107,107,0.3); }
+  .d2 .tl-dot { background: rgba(255,160,122,0.8); box-shadow: 0 0 6px rgba(255,160,122,0.3); }
+  .d3 .tl-dot { background: rgba(78,205,196,0.8);  box-shadow: 0 0 6px rgba(78,205,196,0.3); }
+  .d4 .tl-dot { background: rgba(155,89,182,0.8);  box-shadow: 0 0 6px rgba(155,89,182,0.3); }
+
+  .tl-content { flex: 1; min-width: 0; }
+  .tl-top {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 3px;
+  }
+  .tl-transport {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: #f1f3f5;
+    color: var(--text-light);
+    white-space: nowrap;
+  }
+  .tl-time {
+    order: -1;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: -0.3px;
+  }
+  .d1 .tl-time { color: #FF6B6B; }
+  .d2 .tl-time { color: #FFA07A; }
+  .d3 .tl-time { color: #4ECDC4; }
+  .d4 .tl-time { color: #B07FD4; }
+  .tl-place {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  .tl-note {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+  .tl-cost {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #e67e22;
+    margin-top: 5px;
+    background: rgba(255,179,71,0.12);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* ── TIP BOXES ── */
+  .tip-box {
+    margin: 0 20px 14px;
+    background: #f8f9fa;
+    border: 1px solid #eeeeee;
+    border-radius: 14px;
+    padding: 12px 14px;
+  }
+  .tip-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 6px;
+  }
+  .tip-item {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    background: var(--white);
+    border: 1px solid #f1f3f5;
+    border-radius: 8px;
+    padding: 6px 10px;
+    line-height: 1.4;
+  }
+  .tip-item b { display: block; font-size: 0.65rem; color: var(--text-muted); margin-bottom: 1px; }
+
+  /* ── BUDGET TABLE ── */
+  .budget-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+  }
+  .budget-card {
+    background: var(--white);
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+  }
+  .budget-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 18px;
+    border-bottom: 1px solid #f1f3f5;
+    font-size: 0.82rem;
+  }
+  .budget-row:last-child { border-bottom: none; }
+  .budget-row.total {
+    background: rgba(255,107,107,0.06);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .budget-label { color: var(--text-light); display: flex; align-items: center; gap: 8px; }
+  .budget-amount { font-weight: 600; color: var(--text); }
+  .budget-row.total .budget-amount { color: var(--primary); font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── ANIMATE ── */
+  .day-card {
+    animation: slideUp 0.5s ease both;
+  }
+  .day-card:nth-child(1) { animation-delay: 0.05s; }
+  .day-card:nth-child(2) { animation-delay: 0.15s; }
+  .day-card:nth-child(3) { animation-delay: 0.25s; }
+  .day-card:nth-child(4) { animation-delay: 0.35s; }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── GOOGLE MAPS LINK ── */
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.68rem;
+    color: var(--mint);
+    text-decoration: none;
+    margin-top: 4px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: rgba(78,205,196,0.08);
+    border: 1px solid rgba(78,205,196,0.2);
+    transition: background 0.2s;
+  }
+  .map-link:hover { background: rgba(78,205,196,0.2); }
+
+  /* ── EXPENSE TRACKER ── */
+  .expense-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+  }
+  .expense-card {
+    background: var(--white);
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    animation: slideUp 0.5s ease both;
+    animation-delay: 0.05s;
+  }
+  .expense-header {
+    padding: 16px 18px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f1f3f5;
+  }
+  .expense-header-title { font-size: 0.8rem; font-weight: 700; color: var(--text-light); }
+  .expense-total-display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--primary);
+  }
+  .expense-day-section { border-bottom: 1px solid #f1f3f5; }
+  .expense-day-label {
+    padding: 10px 18px 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .expense-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 18px;
+    border-bottom: 1px solid #f8f9fa;
+  }
+  .expense-row:last-child { border-bottom: none; }
+  .expense-emoji { font-size: 1rem; width: 20px; text-align: center; flex-shrink: 0; }
+  .expense-name { font-size: 0.78rem; color: var(--text-light); flex: 1; min-width: 0; }
+  .expense-input-wrap { position: relative; flex-shrink: 0; }
+  .expense-input {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.78rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 5px 36px 5px 8px;
+    width: 110px;
+    text-align: right;
+    outline: none;
+    transition: border 0.2s;
+  }
+  .expense-input:focus { border-color: var(--primary); }
+  .expense-input::placeholder { color: var(--text-muted); }
+  .expense-unit {
+    position: absolute;
+    right: 8px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+  .expense-day-total {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px 10px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .expense-day-total strong { color: #e67e22; font-size: 0.85rem; }
+  .expense-add-row {
+    padding: 8px 18px;
+    display: flex;
+    gap: 6px;
+  }
+  .expense-add-input {
+    flex: 1;
+    background: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.75rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 5px 10px;
+    outline: none;
+  }
+  .expense-add-input:focus { border-color: var(--mint); }
+  .expense-add-btn {
+    background: rgba(78,205,196,0.1);
+    border: 1px solid rgba(78,205,196,0.3);
+    border-radius: 8px;
+    color: var(--mint);
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .expense-add-btn:hover { background: rgba(78,205,196,0.2); }
+  .expense-grand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background: rgba(255,107,107,0.05);
+    border-top: 1px solid rgba(255,107,107,0.15);
+  }
+  .expense-grand-label { font-size: 0.8rem; font-weight: 700; color: var(--text-light); }
+  .expense-grand-amt {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--primary);
+  }
+
+  /* ── TAB BAR ── */
+  .tab-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    background: var(--white);
+    border-top: 1px solid #e9ecef;
+    box-shadow: 0 -2px 16px rgba(0,0,0,0.1);
+    z-index: 1000;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 10px 0 12px;
+    border: none;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.65rem;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tab-btn .tab-icon { font-size: 1.4rem; line-height: 1; }
+  .tab-btn.active { color: var(--primary); }
+
+  /* ── CUSTOM ROW INTERACTIONS ── */
+  .custom-row .expense-name {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--text-muted);
+  }
+  .custom-row.holding {
+    background: rgba(231,76,60,0.05);
+  }
+
+  /* ── DELETE POPUP ── */
+  .delete-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .delete-popup {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 22px 20px;
+    width: min(290px, 88vw);
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+  .delete-popup-icon { font-size: 2rem; margin-bottom: 10px; }
+  .delete-popup-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .delete-popup-name {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-bottom: 22px;
+    line-height: 1.4;
+  }
+  .delete-popup-btns { display: flex; gap: 10px; }
+  .delete-popup-cancel, .delete-popup-confirm {
+    flex: 1;
+    padding: 11px;
+    border-radius: 12px;
+    border: none;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Pretendard', sans-serif;
+  }
+  .delete-popup-cancel { background: #f1f3f5; color: var(--text-light); }
+  .delete-popup-confirm { background: #e74c3c; color: #fff; }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-title">
+    <span class="t1" style="color:#FFB347">유리구슬 쀼의</span>
+    <span class="t2">오사카 뿌시기</span>
+  </div>
+  <div class="hero-sub">OSAKA DESTRUCTION PROJECT 2026</div>
+  <div class="hero-date">📅 2026.06.13 - 06.16 &nbsp;|&nbsp; 3박 4일</div>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary-section">
+  <div class="summary-grid">
+    <div class="sum-card">
+      <div class="num">4</div>
+      <div class="label">여행 일수</div>
+    </div>
+    <div class="sum-card">
+      <div class="num" style="color:#4ECDC4">3</div>
+      <div class="label">숙박</div>
+    </div>
+    <div class="sum-card">
+      <div class="num" style="color:#FFB347; font-size:1.4rem">200+</div>
+      <div class="label">만원 예상</div>
+    </div>
+    <div class="sum-card">
+      <div class="num" style="color:#FF6B6B" id="summary-actual">0</div>
+      <div class="label">만원 실지출</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 일정 탭 ====== -->
+<div id="schedule-content">
+
+<div class="section-title">📅 일정</div>
+<div class="days-wrapper">
+
+  <!-- DAY 1 -->
+  <div class="day-card d1">
+    <div class="day-header">
+      <div class="day-badge"><div class="d">DAY</div><div class="n">1</div></div>
+      <div class="day-info">
+        <div class="day-date">6월 13일 (토)</div>
+        <div class="day-theme">✈️ 교토 도착 & 온천 힐링</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">✈️ 제주항공</span>
+            <span class="tl-time">08:10 → 10:00</span>
+          </div>
+          <div class="tl-place">김포 → 간사이공항<br><a class="map-link" href="https://www.google.com/maps/search/김포국제공항" target="_blank">📍 지도</a></div>
+          <div class="tl-note">7C1325 · 2터미널 · ✅ 이코카 카드 구매 (인당 2,000엔)</div>
+          <div class="tl-cost">💴 660,000원 (2인)</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🚅 JR 하루카</span>
+            <span class="tl-time">11:14 → 12:34</span>
+          </div>
+          <div class="tl-place">간사이공항 → 교토역<br><a class="map-link" href="https://www.google.com/maps/search/关西国际机场" target="_blank">📍 지도</a></div>
+          <div class="tl-note">8호차 5A, 5B 좌석 예약 완료</div>
+          <div class="tl-cost">💴 37,371원</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🚇 교토 지하철</span>
+          </div>
+          <div class="tl-place">교토역 → 우메코지교토니시역<br><a class="map-link" href="https://www.google.com/maps/search/京都駅" target="_blank">📍 지도</a></div>
+          <div class="tl-note">개찰구 재진입 후 33번 플랫폼, 한 정거장</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🚶 도보 1분</span>
+          </div>
+          <div class="tl-place">우메코지 공원 산책 & 점심<br><a class="map-link" href="https://www.google.com/maps/search/梅小路公園+京都" target="_blank">📍 지도</a></div>
+          <div class="tl-note">체크인 전 근처에서 간단히 점심 + 공원 여유롭게 산책</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🏨 체크인</span>
+            <span class="tl-time">15:00~</span>
+          </div>
+          <div class="tl-place">도쿄 우메코지카덴쇼<br><a class="map-link" href="https://www.google.com/maps/search/梅小路佳碩荘+京都" target="_blank">📍 지도</a></div>
+          <div class="tl-note">온천 즐기기 🛁 · 시간대별 간식 제공 꼭 이용! · 야식 라멘 특히 맛있음</div>
+          <div class="tl-cost">💴 379,200원</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🍢 저녁</span>
+          </div>
+          <div class="tl-place">츠지야 우메코지기타점<br><a class="map-link" href="https://www.google.com/maps/search/辻や梅小路北店+京都" target="_blank">📍 지도</a></div>
+          <div class="tl-note">야키토리 🍡 + 생맥주 🍺</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card d2">
+    <div class="day-header">
+      <div class="day-badge"><div class="d">DAY</div><div class="n">2</div></div>
+      <div class="day-info">
+        <div class="day-date">6월 14일 (일)</div>
+        <div class="day-theme">🎯 오사카 이동 & 난바 탐방</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🛁 조식</span>
+            <span class="tl-time">06:00 ~ 11:00</span>
+          </div>
+          <div class="tl-place">2차 온천 & 조식 야무지게 즐기기</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🚶 도보</span>
+            <span class="tl-time">11:00 ~ 11:30</span>
+          </div>
+          <div class="tl-place">숙소 → 교토역 이동<br><a class="map-link" href="https://www.google.com/maps/search/京都駅" target="_blank">📍 지도</a></div>
+          <div class="tl-note">한 정거장, 20분 내외</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🚄 JR 본선</span>
+            <span class="tl-time">약 40분</span>
+          </div>
+          <div class="tl-place">교토역 → 우메다역 → 난바역<br><a class="map-link" href="https://www.google.com/maps/search/난바역+오사카" target="_blank">📍 지도</a></div>
+          <div class="tl-note">환승 도보 4분 · 총 약 1시간</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🍣 점심</span>
+            <span class="tl-time">13:00~</span>
+          </div>
+          <div class="tl-place">스시사카바 사시스 난바점<br><a class="map-link" href="https://www.google.com/maps/search/鮨酒場さしす+難波+大阪" target="_blank">📍 지도</a></div>
+          <div class="tl-note">참치초밥 🐟 + 새우육회 🦐 메인!! · 박명수 맛집 · 웨이팅 1시간 예상</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🛍 쇼핑</span>
+          </div>
+          <div class="tl-place">난바워크 지하상가 구경<br><a class="map-link" href="https://www.google.com/maps/search/なんばウォーク+大阪" target="_blank">📍 지도</a></div>
+          <div class="tl-note">난바역 → 닛폰바시역 지하상가 · 디저트 추천: 리쿠로오지상 (치즈케이크) 🍰, 아마토메이다 당고</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🚇 지하철</span>
+            <span class="tl-time">16:00~</span>
+          </div>
+          <div class="tl-place">닛폰바시역 → 사쿠라지마 방면<br><a class="map-link" href="https://www.google.com/maps/search/日本橋駅+大阪" target="_blank">📍 지도</a></div>
+          <div class="tl-note">센니치마에선 + JR유메사키선 환승 · 총 약 30분</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🏨 체크인</span>
+            <span class="tl-time">16:30~</span>
+          </div>
+          <div class="tl-place">더 싱귤러리 호텔 & 스카이스파 at USJ<br><a class="map-link" href="https://www.google.com/maps/search/The+Singularity+Hotel+Osaka+USJ" target="_blank">📍 지도</a></div>
+          <div class="tl-note">14층 무료 대욕장 & 노천탕 🛁</div>
+          <div class="tl-cost">💴 133,800원</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🌆 저녁</span>
+          </div>
+          <div class="tl-place">유니버셜 시티워크 구경<br><a class="map-link" href="https://www.google.com/maps/search/ユニバーサルシティウォーク大阪" target="_blank">📍 지도</a></div>
+          <div class="tl-note">타코야끼 🐙 · 갈비챔프 무한리필 🥩 · 이치란 라멘 🍜 · 스시로 회전초밥 · 호라이 만두</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card d3">
+    <div class="day-header">
+      <div class="day-badge"><div class="d">DAY</div><div class="n">3</div></div>
+      <div class="day-info">
+        <div class="day-date">6월 15일 (월)</div>
+        <div class="day-theme">🎢 유니버셜 스튜디오 오픈런!</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">⏰ 기상</span>
+            <span class="tl-time">05:30</span>
+          </div>
+          <div class="tl-place">전날 편의점 먹거리 준비 필수!</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🎡 USJ</span>
+            <span class="tl-time">06:00 ~ 18:00</span>
+          </div>
+          <div class="tl-place">유니버셜 스튜디오 재팬 오픈런 🏃<br><a class="map-link" href="https://www.google.com/maps/search/Universal+Studios+Japan+Osaka" target="_blank">📍 지도</a></div>
+          <div class="tl-note">돗자리 + 아침식사 지참 추천<br>🍄 닌텐도월드: 동키콩, 요시어드벤처, 마리오카트<br>⚡ 해리포터: 포비든저니<br>🦖 쥬라기공원: 더 플라잉 다이노소어<br>💧 워터월드 공연</div>
+          <div class="tl-cost">💴 174,000원</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🚅 JR · 한신</span>
+          </div>
+          <div class="tl-place">유니버셜시티 → 오사카 난바<br><a class="map-link" href="https://www.google.com/maps/search/ユニバーサルシティ駅+大阪" target="_blank">📍 지도</a></div>
+          <div class="tl-note">유메사키선 + 한신난바선 · 총 약 40분</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🏨 체크인</span>
+          </div>
+          <div class="tl-place">호텔 케이한 난바 그란데<br><a class="map-link" href="https://www.google.com/maps/search/Hotel+Keihan+Namba+Grande+Osaka" target="_blank">📍 지도</a></div>
+          <div class="tl-cost">💴 175,300원</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🥩 저녁</span>
+          </div>
+          <div class="tl-place">야키니쿠 히후미 or Moegi<br><a class="map-link" href="https://www.google.com/maps/search/焼肉ひふみ+難波+大阪" target="_blank">📍 지도</a></div>
+          <div class="tl-note">히후미 (18:00~, 인스타 DM 예약) - 우설, 안창살, 등심, 뽈살 추천 🥩<br>Moegi - 소금야끼소바, 돈페이야끼 추천</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 편의점 팁 -->
+    <div class="tip-box">
+      <div class="tip-title" style="color:#4ECDC4">🏪 편의점 추천템</div>
+      <div class="tip-grid">
+        <div class="tip-item"><b>LAWSON 로손</b>모찌롤, 카라아게군</div>
+        <div class="tip-item"><b>7-Eleven 세븐</b>타마고샌드위치, 야끼소바 도시락</div>
+        <div class="tip-item"><b>FamilyMart 패밀리</b>파미치키, 수플레 푸딩</div>
+        <div class="tip-item"><b>공통 추천</b>이로하스 복숭아물, 산토리 하이볼 캔</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card d4">
+    <div class="day-header">
+      <div class="day-badge"><div class="d">DAY</div><div class="n">4</div></div>
+      <div class="day-info">
+        <div class="day-date">6월 16일 (화)</div>
+        <div class="day-theme">🛍 쇼핑 & 귀국</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🌅 기상</span>
+            <span class="tl-time">07:00 ~ 11:00</span>
+          </div>
+          <div class="tl-place">기상 및 조식</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🛍 쇼핑</span>
+            <span class="tl-time">11:00~</span>
+          </div>
+          <div class="tl-place">돈키호테 도톤보리점<br><a class="map-link" href="https://www.google.com/maps/search/ドン・キホーテ+道頓堀+大阪" target="_blank">📍 지도</a></div>
+          <div class="tl-note">1층부터 위로 올라가는 게 효율적!<br>계란간장, 민티아, 블랙썬더, 코로로젤리, 자가리코, 파블로 랑그드샤, 생구미</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">👟 패션</span>
+          </div>
+          <div class="tl-place">오니츠카 타이거 · 유니클로 · GU<br><a class="map-link" href="https://www.google.com/maps/search/オニツカタイガー+心斎橋+大阪" target="_blank">📍 지도</a></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-top">
+            <span class="tl-transport">🚄 라피트</span>
+            <span class="tl-time">13:35 → 14:12</span>
+          </div>
+          <div class="tl-place">난카이난바역 → 간사이공항<br><a class="map-link" href="https://www.google.com/maps/search/南海難波駅+大阪" target="_blank">📍 지도</a></div>
+          <div class="tl-cost">💴 27,000원</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BUDGET -->
+<div class="section-title">💰 예약 금액 정리</div>
+<div class="budget-section">
+  <div class="budget-card">
+    <div class="budget-row">
+      <div class="budget-label">✈️ 항공권 (왕복 2인)</div>
+      <div class="budget-amount">660,000원</div>
+    </div>
+    <div class="budget-row">
+      <div class="budget-label">🚅 JR 하루카 (2인)</div>
+      <div class="budget-amount">37,371원</div>
+    </div>
+    <div class="budget-row">
+      <div class="budget-label">🏨 숙박 1 - 우메코지카덴쇼</div>
+      <div class="budget-amount">379,200원</div>
+    </div>
+    <div class="budget-row">
+      <div class="budget-label">🏨 숙박 2 - 싱귤러리 호텔</div>
+      <div class="budget-amount">133,800원</div>
+    </div>
+    <div class="budget-row">
+      <div class="budget-label">🏨 숙박 3 - 케이한 난바 그란데</div>
+      <div class="budget-amount">175,300원</div>
+    </div>
+    <div class="budget-row">
+      <div class="budget-label">🎢 USJ 입장권</div>
+      <div class="budget-amount">174,000원</div>
+    </div>
+    <div class="budget-row">
+      <div class="budget-label">🚄 라피트</div>
+      <div class="budget-amount">27,000원</div>
+    </div>
+    <div class="budget-row total">
+      <div class="budget-label">💳 총 예산 (교통+숙박+입장권)</div>
+      <div class="budget-amount">1,586,671원</div>
+    </div>
+  </div>
+</div>
+
+
+</div><!-- /schedule-content -->
+
+
+<!-- ====== 지출 탭 ====== -->
+<div id="expense-content" style="display:none">
+
+<div class="section-title">💸 실시간 지출 기록</div>
+<div class="expense-section">
+  <div class="expense-card">
+    <div class="expense-header">
+      <div class="expense-header-title">💳 실시간 총 지출</div>
+      <div class="expense-total-display" id="grand-total-header">0원</div>
+    </div>
+
+    <div class="expense-day-section" data-day-section="1">
+      <div class="expense-day-label">📅 Day 1 · 6월 13일</div>
+      <div class="expense-row"><span class="expense-emoji">✈️</span><span class="expense-name">항공권 (2인)</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="660,000" value="660000" data-day="1" data-key="d1-flight"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🚅</span><span class="expense-name">JR 하루카 (2인)</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="37,371" value="37371" data-day="1" data-key="d1-jr"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🏨</span><span class="expense-name">우메코지카덴쇼 숙박</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="379,200" value="379200" data-day="1" data-key="d1-hotel"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🍢</span><span class="expense-name">츠지야 저녁</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="1" data-key="d1-dinner"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🛒</span><span class="expense-name">이코카 카드 + 교통비</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="1" data-key="d1-icoca"><span class="expense-unit">원</span></div></div>
+      <div class="expense-add-row"><input class="expense-add-input" type="text" placeholder="+ 항목 추가 (예: 편의점)" id="add-name-1"><button class="expense-add-btn" onclick="addRow(1)">추가 ＋</button></div>
+      <div class="expense-day-total">Day 1 소계: <strong id="day-total-1">0원</strong></div>
+    </div>
+
+    <div class="expense-day-section" data-day-section="2">
+      <div class="expense-day-label">📅 Day 2 · 6월 14일</div>
+      <div class="expense-row"><span class="expense-emoji">🍣</span><span class="expense-name">스시사카바 사시스 점심</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="2" data-key="d2-sushi"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🛍</span><span class="expense-name">난바워크 쇼핑 + 디저트</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="2" data-key="d2-shop"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🏨</span><span class="expense-name">싱귤러리 호텔 숙박</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="133,800" value="133800" data-day="2" data-key="d2-hotel"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🌆</span><span class="expense-name">유니버셜 시티워크 저녁</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="2" data-key="d2-dinner"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🚇</span><span class="expense-name">교통비 (지하철 등)</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="2" data-key="d2-transport"><span class="expense-unit">원</span></div></div>
+      <div class="expense-add-row"><input class="expense-add-input" type="text" placeholder="+ 항목 추가 (예: 편의점)" id="add-name-2"><button class="expense-add-btn" onclick="addRow(2)">추가 ＋</button></div>
+      <div class="expense-day-total">Day 2 소계: <strong id="day-total-2">0원</strong></div>
+    </div>
+
+    <div class="expense-day-section" data-day-section="3">
+      <div class="expense-day-label">📅 Day 3 · 6월 15일</div>
+      <div class="expense-row"><span class="expense-emoji">🎢</span><span class="expense-name">USJ 입장권 (2인)</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="174,000" value="174000" data-day="3" data-key="d3-usj"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🍔</span><span class="expense-name">USJ 내 식음료</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="3" data-key="d3-food"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🎁</span><span class="expense-name">USJ 굿즈 쇼핑</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="3" data-key="d3-goods"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🏨</span><span class="expense-name">케이한 난바 그란데 숙박</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="175,300" value="175300" data-day="3" data-key="d3-hotel"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🥩</span><span class="expense-name">야키니쿠 저녁</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="3" data-key="d3-yakiniku"><span class="expense-unit">원</span></div></div>
+      <div class="expense-add-row"><input class="expense-add-input" type="text" placeholder="+ 항목 추가 (예: 편의점)" id="add-name-3"><button class="expense-add-btn" onclick="addRow(3)">추가 ＋</button></div>
+      <div class="expense-day-total">Day 3 소계: <strong id="day-total-3">0원</strong></div>
+    </div>
+
+    <div class="expense-day-section" data-day-section="4">
+      <div class="expense-day-label">📅 Day 4 · 6월 16일</div>
+      <div class="expense-row"><span class="expense-emoji">🛍</span><span class="expense-name">돈키호테 쇼핑</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="4" data-key="d4-donki"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">👟</span><span class="expense-name">오니츠카/유니클로/GU</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="4" data-key="d4-fashion"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🚄</span><span class="expense-name">라피트 (2인)</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="27,000" value="27000" data-day="4" data-key="d4-rapit"><span class="expense-unit">원</span></div></div>
+      <div class="expense-row"><span class="expense-emoji">🍌</span><span class="expense-name">공항 기념품</span><div class="expense-input-wrap"><input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="4" data-key="d4-souvenir"><span class="expense-unit">원</span></div></div>
+      <div class="expense-add-row"><input class="expense-add-input" type="text" placeholder="+ 항목 추가 (예: 점심)" id="add-name-4"><button class="expense-add-btn" onclick="addRow(4)">추가 ＋</button></div>
+      <div class="expense-day-total">Day 4 소계: <strong id="day-total-4">0원</strong></div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /expense-content -->
+
+
+<!-- DELETE POPUP -->
+<div id="delete-overlay" class="delete-overlay" style="display:none" onclick="closeDeletePopup()">
+  <div class="delete-popup" onclick="event.stopPropagation()">
+    <div class="delete-popup-icon">🗑️</div>
+    <div class="delete-popup-title">항목을 삭제할까요?</div>
+    <div class="delete-popup-name" id="delete-popup-name"></div>
+    <div class="delete-popup-btns">
+      <button class="delete-popup-cancel" onclick="closeDeletePopup()">취소</button>
+      <button class="delete-popup-confirm" onclick="confirmDelete()">삭제</button>
+    </div>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('schedule')" id="tab-schedule">
+    <span class="tab-icon">📅</span>
+    <span>일정</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('expense')" id="tab-expense">
+    <span class="tab-icon">💸</span>
+    <span>지출</span>
+  </button>
+</div>
+
+<script>
+var LS_KEY = 'osaka26';
+
+function fmt(n) { return n.toLocaleString('ko-KR') + '원'; }
+function parseVal(v) { return parseFloat(String(v).replace(/,/g, '')) || 0; }
+function fmtInput(n) { return n > 0 ? n.toLocaleString('ko-KR') : ''; }
+
+function calcTotals() {
+  var grand = 0;
+  for (var d = 1; d <= 4; d++) {
+    var inputs = document.querySelectorAll('[data-day="' + d + '"]');
+    var daySum = 0;
+    inputs.forEach(function(inp) { daySum += parseVal(inp.value); });
+    grand += daySum;
+    var el = document.getElementById('day-total-' + d);
+    if (el) el.textContent = fmt(daySum);
+  }
+  document.getElementById('grand-total-header').textContent = fmt(grand);
+  var actualEl = document.getElementById('summary-actual');
+  if (actualEl) actualEl.textContent = grand > 0 ? Math.floor(grand / 10000) : '0';
+}
+
+function saveData() {
+  var data = { fixed: {}, custom: {} };
+  document.querySelectorAll('.expense-input[data-key]').forEach(function(inp) {
+    data.fixed[inp.dataset.key] = parseVal(inp.value);
+  });
+  for (var d = 1; d <= 4; d++) {
+    var section = document.querySelector('.expense-day-section[data-day-section="' + d + '"]');
+    if (!section) continue;
+    var customs = [];
+    section.querySelectorAll('.expense-row.custom-row').forEach(function(row) {
+      var inp = row.querySelector('.expense-input');
+      var name = row.querySelector('.expense-name').textContent;
+      customs.push({ name: name, value: parseVal(inp.value) });
+    });
+    data.custom['d' + d] = customs;
+  }
+  try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function loadData() {
+  var raw;
+  try { raw = localStorage.getItem(LS_KEY); } catch(e) {}
+  if (!raw) return;
+  var data;
+  try { data = JSON.parse(raw); } catch(e) { return; }
+
+  if (data.fixed) {
+    Object.keys(data.fixed).forEach(function(key) {
+      var inp = document.querySelector('.expense-input[data-key="' + key + '"]');
+      if (inp) {
+        var v = data.fixed[key];
+        inp.value = v > 0 ? fmtInput(v) : '';
+      }
+    });
+  }
+  if (data.custom) {
+    for (var d = 1; d <= 4; d++) {
+      var customs = data.custom['d' + d];
+      if (customs && customs.length) {
+        customs.forEach(function(item) { insertCustomRow(d, item.name, item.value); });
+      }
+    }
+  }
+  calcTotals();
+}
+
+function makeNameSpan(name) {
+  var span = document.createElement('span');
+  span.className = 'expense-name';
+  span.textContent = name;
+  span.addEventListener('click', function() { editRowName(span); });
+  return span;
+}
+
+function insertCustomRow(day, name, value) {
+  var section = document.querySelector('.expense-day-section[data-day-section="' + day + '"]');
+  if (!section) return;
+  var addRowEl = section.querySelector('.expense-add-row');
+  var row = document.createElement('div');
+  row.className = 'expense-row custom-row';
+  row.innerHTML = '<span class="expense-emoji">📝</span>'
+    + '<span class="expense-name-placeholder"></span>'
+    + '<div class="expense-input-wrap">'
+    + '<input class="expense-input" type="text" inputmode="numeric" placeholder="0" data-day="' + day + '">'
+    + '<span class="expense-unit">원</span></div>';
+  row.querySelector('.expense-name-placeholder').replaceWith(makeNameSpan(name));
+  addRowEl.parentNode.insertBefore(row, addRowEl);
+  if (value > 0) row.querySelector('.expense-input').value = fmtInput(value);
+  attachLongPress(row);
+}
+
+function addRow(day) {
+  var nameInput = document.getElementById('add-name-' + day);
+  var name = nameInput.value.trim();
+  if (!name) return;
+  insertCustomRow(day, name, 0);
+  nameInput.value = '';
+  calcTotals();
+  saveData();
+}
+
+function switchTab(tab) {
+  var isSchedule = tab === 'schedule';
+  document.getElementById('schedule-content').style.display = isSchedule ? '' : 'none';
+  document.getElementById('expense-content').style.display = isSchedule ? 'none' : '';
+  document.getElementById('tab-schedule').classList.toggle('active', isSchedule);
+  document.getElementById('tab-expense').classList.toggle('active', !isSchedule);
+  window.scrollTo(0, 0);
+}
+
+document.addEventListener('input', function(e) {
+  if (e.target.classList.contains('expense-input')) {
+    calcTotals();
+    saveData();
+  }
+});
+document.addEventListener('blur', function(e) {
+  if (e.target.classList.contains('expense-input')) {
+    var raw = parseVal(e.target.value);
+    e.target.value = fmtInput(raw);
+  }
+}, true);
+document.addEventListener('focus', function(e) {
+  if (e.target.classList.contains('expense-input')) {
+    var raw = parseVal(e.target.value);
+    e.target.value = raw > 0 ? String(raw) : '';
+  }
+}, true);
+
+function editRowName(nameEl) {
+  var current = nameEl.textContent;
+  var inp = document.createElement('input');
+  inp.type = 'text';
+  inp.value = current;
+  inp.style.cssText = 'flex:1;min-width:0;font-size:0.78rem;border:1px solid var(--mint);border-radius:6px;padding:3px 7px;outline:none;font-family:inherit;background:#fff;';
+  nameEl.replaceWith(inp);
+  inp.focus();
+  inp.select();
+  function commit() {
+    var newName = inp.value.trim() || current;
+    var newSpan = makeNameSpan(newName);
+    inp.replaceWith(newSpan);
+    saveData();
+  }
+  inp.addEventListener('blur', commit);
+  inp.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') inp.blur();
+    if (e.key === 'Escape') { inp.value = current; inp.blur(); }
+  });
+}
+
+var _deleteTarget = null;
+var _holdTimer = null;
+var HOLD_MS = 600;
+
+function attachLongPress(row) {
+  function startHold() {
+    row.classList.add('holding');
+    _holdTimer = setTimeout(function() {
+      row.classList.remove('holding');
+      openDeletePopup(row);
+    }, HOLD_MS);
+  }
+  function cancelHold() {
+    clearTimeout(_holdTimer);
+    row.classList.remove('holding');
+  }
+  row.addEventListener('touchstart', startHold, { passive: true });
+  row.addEventListener('touchend', cancelHold);
+  row.addEventListener('touchmove', cancelHold, { passive: true });
+  row.addEventListener('mousedown', startHold);
+  row.addEventListener('mouseup', cancelHold);
+  row.addEventListener('mouseleave', cancelHold);
+}
+
+function openDeletePopup(row) {
+  _deleteTarget = row;
+  var name = row.querySelector('.expense-name').textContent;
+  document.getElementById('delete-popup-name').textContent = '"' + name + '"';
+  document.getElementById('delete-overlay').style.display = 'flex';
+}
+
+function closeDeletePopup() {
+  document.getElementById('delete-overlay').style.display = 'none';
+  _deleteTarget = null;
+}
+
+function confirmDelete() {
+  if (_deleteTarget) {
+    _deleteTarget.remove();
+    calcTotals();
+    saveData();
+  }
+  closeDeletePopup();
+}
+
+document.querySelectorAll('.expense-input').forEach(function(inp) {
+  var raw = parseVal(inp.value);
+  if (raw > 0) inp.value = fmtInput(raw);
+});
+loadData();
+calcTotals();
+</script>
+
+</body>
+</html>
